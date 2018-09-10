@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeCrawler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Recipe crawler" Height="640" Width="640">
     <Grid>
-        
+        <Rectangle Fill="#FFF4F4F5" Height="44" Stroke="Black" VerticalAlignment="Top"/>
+        <TextBox x:Name="SearchBox" Height="32" TextWrapping="Wrap" Text="Ingridients..." VerticalAlignment="Top" Margin="10,6,75,0" VerticalContentAlignment="Center"/>
+        <Button x:Name="SearchButton" Content="search" HorizontalAlignment="Right" Margin="0,6,5,0" VerticalAlignment="Top" Width="63" Height="32" Click="SearchButton_Click" IsDefault="True"/>
+        <Label x:Name="StatusLabel" Content="Search for recipes" FontSize="24" Foreground="#FFC8C8C8" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,44,0,0"/>
+        <ScrollViewer x:Name="RecipeList" Margin="0,44,0,0">
+            <ItemsControl x:Name="RecipeItemControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <Image Source="{Binding Path=Thumbnail}" Width="120" Height="60" ToolTip="{Binding Path=Thumbnail}"/>
+                            <StackPanel Margin="10,0,10,20" DockPanel.Dock="Right">
+                                <TextBlock Text="{Binding Path=Title}" Foreground="#FF575757" FontSize="18"/>
+                                <TextBlock Text="{Binding Path=UniqueIngredients}" Foreground="#FF787878" FontSize="16" />
+                                <TextBlock FontSize="16">           
+                                    <Hyperlink NavigateUri="{Binding Path=Href}" ToolTip="{Binding Path=Href}" RequestNavigate="LinkOnRequestNavigate">
+                                        Open recipe in a browser
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
     </Grid>
 </Window>
